@@ -20,7 +20,7 @@ function DaysWithoutSmokingCard({ days = 0, hoursPassed = 0 }: Props) {
         <CardTitle>Días sin fumar</CardTitle>
         <CardDescription>Dale que vos podés!</CardDescription>
       </CardHeader>
-      <CardContent className="flex justify-between">
+      <CardContent className="flex gap-8">
         <div className="flex gap-5 items-center">
           <h1 className="text-8xl font-black">{days}</h1>
           <span className="text-4xl font-extrabold">
