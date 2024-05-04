@@ -20,6 +20,7 @@ export async function initializeUser() {
     startDate: new Date().toUTCString(),
     cigarettePrice: 0,
     cigarettesPerDay: 0,
+    isChallenge: false,
   };
 
   const dbUser: User | null = await prisma.user.findUnique({

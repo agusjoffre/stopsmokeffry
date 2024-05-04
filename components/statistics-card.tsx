@@ -16,7 +16,7 @@ function StatisticsCard({}: Props) {
   return (
     <Card className="h-full flex flex-col justify-center w-full">
       <CardHeader>
-        <CardTitle>Tus estadisticas</CardTitle>
+        <CardTitle>Tus estadísticas</CardTitle>
         <CardDescription>
           Cuanto te ahorraste desde que dejaste de fumar.
         </CardDescription>

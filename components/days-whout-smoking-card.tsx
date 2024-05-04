@@ -17,14 +17,14 @@ function DaysWithoutSmokingCard({ days = 0, hoursPassed = 0 }: Props) {
   return (
     <Card className="h-full flex flex-col justify-center w-full">
       <CardHeader>
-        <CardTitle>Dias sin fumar</CardTitle>
-        <CardDescription>Dale que vos podes!</CardDescription>
+        <CardTitle>Días sin fumar</CardTitle>
+        <CardDescription>Dale que vos podés!</CardDescription>
       </CardHeader>
       <CardContent className="flex justify-between">
         <div className="flex gap-5 items-center">
           <h1 className="text-8xl font-black">{days}</h1>
           <span className="text-4xl font-extrabold">
-            {days === 1 ? "dia." : "dias."}
+            {days === 1 ? "día." : "días."}
           </span>
         </div>
         <div className="flex gap-2 items-center">
@@ -34,7 +34,7 @@ function DaysWithoutSmokingCard({ days = 0, hoursPassed = 0 }: Props) {
       </CardContent>
       <CardFooter className="w-full">
         <Button variant={"destructive"} className="w-full">
-          Volvi a fumar {"   "}
+          Volví a fumar {"   "}
           <span className="text-2xl">😭</span>
         </Button>
       </CardFooter>

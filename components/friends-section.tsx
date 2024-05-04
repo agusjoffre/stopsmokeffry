@@ -18,7 +18,7 @@ function FriendsSection({}: Props) {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Amigo</TableHead>
-            <TableHead className="text-right">Dias sin fumar</TableHead>
+            <TableHead className="text-right">Días sin fumar</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

@@ -15,6 +15,7 @@ model User {
   cigarettesPerDay Int
   friends          Friendship[] @relation("friends")
   friendsOf        Friendship[] @relation("friendsOf")
+  isChallenge      Boolean      @default(false)
 }
 
 enum FriendshipState {
