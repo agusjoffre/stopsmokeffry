@@ -17,7 +17,7 @@ async function Header({}: Props) {
         <div className="flex gap-8 items-center">
           <div className="flex gap-4 items-center">
             <p className="text-xs font-bold hidden md:block">
-              @{user?.username}
+              {user?.username ? `@${user.username}` : user?.fullName}
             </p>
             <UserButton />
           </div>
