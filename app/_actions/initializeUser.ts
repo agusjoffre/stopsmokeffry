@@ -17,7 +17,6 @@ export async function initializeUser() {
     name: clerkUser.username
       ? clerkUser.username
       : (clerkUser.fullName as string),
-    daysWithoutSmoking: 0,
     startDate: new Date().toUTCString(),
     cigarettePrice: 0,
     cigarettesPerDay: 0,

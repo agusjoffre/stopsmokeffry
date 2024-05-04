@@ -8,14 +8,13 @@ datasource db {
 }
 
 model User {
-  id                  String        @id @unique
-  name                String
-  daysWithoutSmoking  Int
-  startDate           String
-  cigarettePrice      Int
-  cigarettesPerDay    Int
-  friends Friendship[] @relation("friends")
-  friendsOf Friendship[] @relation("friendsOf")
+  id               String       @id @unique
+  name             String
+  startDate        String
+  cigarettePrice   Int
+  cigarettesPerDay Int
+  friends          Friendship[] @relation("friends")
+  friendsOf        Friendship[] @relation("friendsOf")
 }
 
 enum FriendshipState {
@@ -25,10 +24,11 @@ enum FriendshipState {
 }
 
 model Friendship {
-  friends User @relation("friends", fields: [friendId], references: [id])
-  friendId String
-  friendsOf User @relation("friendsOf", fields: [friendOfId], references: [id])
+  friends    User            @relation("friends", fields: [friendId], references: [id])
+  friendId   String
+  friendsOf  User            @relation("friendsOf", fields: [friendOfId], references: [id])
   friendOfId String
-  state FriendshipState @default(PENDING)
+  state      FriendshipState @default(PENDING)
+
   @@id([friendOfId, friendId])
 }

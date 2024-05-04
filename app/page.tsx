@@ -7,7 +7,10 @@ import { PlusCircleIcon } from "lucide-react";
 import { initializeUser } from "./_actions/initializeUser";
 import prisma from "@/prisma/prismaClient";
 import { currentUser } from "@clerk/nextjs/server";
-import { calculateHoursPassed } from "./_actions/calculateTime";
+import {
+  calculateDaysPassed,
+  calculateHoursPassed,
+} from "./_actions/calculateTime";
 
 async function Home(): Promise<JSX.Element> {
   await initializeUser();
@@ -16,14 +19,6 @@ async function Home(): Promise<JSX.Element> {
 
   /* TODO: get statistics and pass as props */
 
-  const daysWhSmoking = await prisma.user.findUnique({
-    where: {
-      id: user?.id,
-    },
-    select: {
-      daysWithoutSmoking: true,
-    },
-  });
   const startDate = await prisma.user.findUnique({
     where: {
       id: user?.id,
@@ -33,6 +28,7 @@ async function Home(): Promise<JSX.Element> {
     },
   });
 
+  const daysWithoutSmoking = calculateDaysPassed(startDate?.startDate!);
   const hoursPassed = calculateHoursPassed(startDate?.startDate!);
 
   /*TODO: get friends */
@@ -42,7 +38,7 @@ async function Home(): Promise<JSX.Element> {
       <div className="flex flex-col gap-12 items-center flex-[2]">
         <div className="flex items-center gap-6 w-full md:flex-row flex-col">
           <DaysWithoutSmokingCard
-            days={daysWhSmoking?.daysWithoutSmoking || 0}
+            days={daysWithoutSmoking || 0}
             hoursPassed={hoursPassed}
           />
           <StatisticsCard />

@@ -23,7 +23,9 @@ function DaysWithoutSmokingCard({ days = 0, hoursPassed = 0 }: Props) {
       <CardContent className="flex justify-between">
         <div className="flex gap-5 items-center">
           <h1 className="text-8xl font-black">{days}</h1>
-          <span className="text-4xl font-extrabold">dias.</span>
+          <span className="text-4xl font-extrabold">
+            {days === 1 ? "dia." : "dias."}
+          </span>
         </div>
         <div className="flex gap-2 items-center">
           <h2 className="text-4xl font-extrabold">{hoursPassed}</h2>
