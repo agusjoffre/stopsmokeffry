@@ -8,8 +8,8 @@ export async function initializeUser() {
   if (!user) return;
 
   const newUser = {
-    clerkId: user.id,
-    username: user.username,
+    id: user.id,
+    name: user.username,
     daysWithoutSmoking: 0,
     startDate: new Date(),
     cigarettePrice: 0,
