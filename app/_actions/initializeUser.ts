@@ -11,13 +11,14 @@ export async function initializeUser() {
 
   if (!clerkUser) redirect("/sign-in");
 
+
   const newUser: User = {
     id: clerkUser.id,
     name: clerkUser.username
       ? clerkUser.username
       : (clerkUser.fullName as string),
     daysWithoutSmoking: 0,
-    startDate: new Date().toDateString(),
+    startDate: new Date().toUTCString(),
     cigarettePrice: 0,
     cigarettesPerDay: 0,
   };

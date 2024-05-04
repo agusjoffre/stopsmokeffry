@@ -8,18 +8,27 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 
-type Props = {};
+type Props = {
+  days: number;
+  hoursPassed: number;
+};
 
-function DaysWithoutSmokingCard({}: Props) {
+function DaysWithoutSmokingCard({ days = 0, hoursPassed = 0 }: Props) {
   return (
     <Card className="h-full flex flex-col justify-center w-full">
       <CardHeader>
         <CardTitle>Dias sin fumar</CardTitle>
         <CardDescription>Dale que vos podes!</CardDescription>
       </CardHeader>
-      <CardContent className="flex gap-5 items-center">
-        <h1 className="text-8xl font-black"></h1>
-        <span className="text-4xl font-extrabold">dias.</span>
+      <CardContent className="flex justify-between">
+        <div className="flex gap-5 items-center">
+          <h1 className="text-8xl font-black">{days}</h1>
+          <span className="text-4xl font-extrabold">dias.</span>
+        </div>
+        <div className="flex gap-2 items-center">
+          <h2 className="text-4xl font-extrabold">{hoursPassed}</h2>
+          <span className="text-2xl font-bold">horas.</span>
+        </div>
       </CardContent>
       <CardFooter className="w-full">
         <Button variant={"destructive"} className="w-full">
