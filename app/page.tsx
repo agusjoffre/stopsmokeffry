@@ -3,7 +3,7 @@ import DaysWithoutSmokingCard from "@/components/days-whout-smoking-card";
 import FriendsSection from "@/components/friends-section";
 import StatisticsCard from "@/components/statistics-card";
 import { Button } from "@/components/ui/button";
-import { PlusCircleIcon } from "lucide-react";
+
 import { initializeUser } from "./_actions/initializeUser";
 import prisma from "@/prisma/prismaClient";
 import { currentUser } from "@clerk/nextjs/server";
@@ -12,6 +12,7 @@ import {
   calculateHoursPassed,
 } from "./_actions/calculateTime";
 import StartTheCallengeButton from "@/components/start-the-challenge-button";
+import AddFriendDialog from "@/components/add-friend";
 
 async function Home(): Promise<JSX.Element> {
   await initializeUser();
@@ -19,7 +20,6 @@ async function Home(): Promise<JSX.Element> {
   const user = await currentUser();
   if (!user) return <div></div>;
 
-  /* TODO: get statistics and pass as props */
   const isChallenge = await prisma.user.findUnique({
     where: {
       id: user?.id,
@@ -39,10 +39,18 @@ async function Home(): Promise<JSX.Element> {
   });
 
   const daysWithoutSmoking = calculateDaysPassed(startDate?.startDate!);
-
   const hoursPassed = calculateHoursPassed(startDate?.startDate!);
 
+  const userCode = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    select: {
+      code: true,
+    },
+  });
 
+  /* TODO: get statistics and pass as props */
   /*TODO: get friends */
 
   return (
@@ -68,10 +76,7 @@ async function Home(): Promise<JSX.Element> {
 
       <div className="h-full flex flex-col gap-10 items-center">
         {/* friends ? <FriendsSection friends={friends} /> : <Button>Add a new friend</Button> */}
-        <Button className="w-fit bg-accent text-accent-foreground flex items-center gap-2 hover:bg-accent-foreground hover:text-accent">
-          <PlusCircleIcon />
-          Agregar amigo/a
-        </Button>
+        <AddFriendDialog userCode={userCode?.code!} />
         <FriendsSection />
       </div>
     </div>
