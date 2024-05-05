@@ -1,6 +1,8 @@
 "use server";
 import prisma from "@/prisma/prismaClient";
 import { currentUser } from "@clerk/nextjs/server";
+import { User } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 /* currentState is required for useFormState() hook*/
 export const addFriend = async (currentState: unknown, formData: FormData) => {
@@ -48,6 +50,44 @@ export const addFriend = async (currentState: unknown, formData: FormData) => {
     exists: false,
   };
 };
-export const friendStateUpdate = async (isAccepted: boolean) => {
-  /* si isAccepted true entonces cambiar prisma.friendship.state a ACCEPTED sino cambiar a REJECTED */
+
+export const friendStateUpdate = async (isAccepted: boolean, friend: User) => {
+  const user = await currentUser();
+  if (!user) return;
+  if (!friend) return;
+  if (isAccepted === true) {
+    const updatedAcceptedFriendship = await prisma.friendship.updateMany({
+      where: {
+        friendId: user.id,
+        friendOfId: friend.id,
+      },
+      data: {
+        state: "ACCEPTED",
+      },
+    });
+
+    return (
+      revalidatePath("/"),
+      {
+        state: "accepted",
+      }
+    );
+  } else {
+    const updatedRejectedFriendship = await prisma.friendship.updateMany({
+      where: {
+        friendId: user.id,
+        friendOfId: friend.id,
+      },
+      data: {
+        state: "REJECTED",
+      },
+    });
+
+    return (
+      revalidatePath("/"),
+      {
+        state: "rejected",
+      }
+    );
+  }
 };

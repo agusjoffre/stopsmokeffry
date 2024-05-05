@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { DropdownMenuItem } from "./ui/dropdown-menu";
 import prisma from "@/prisma/prismaClient";
 import { Friendship } from "@prisma/client";
+import FriendItemBtns from "./friend-item-btns";
 
 type Props = {
   friendship: Friendship;
@@ -13,7 +14,7 @@ type Props = {
 async function FriendNotificationItem({ friendship }: Props) {
   const friend = await prisma.user.findUnique({
     where: {
-      id: friendship.friendId,
+      id: friendship.friendOfId,
     },
   });
 
@@ -32,14 +33,7 @@ async function FriendNotificationItem({ friendship }: Props) {
             </Avatar>
             <p className="text-sm font-medium">@{friend?.name!}</p>
           </div>
-          <div className="flex items-center gap-1 ">
-            <Button className="bg-emerald-700 hover:bg-emerald-500">
-              <SquareCheck />
-            </Button>
-            <Button className="bg-destructive text-destructive-foreground hover:bg-destructive-foreground hover:text-destructive">
-              <SquareX />
-            </Button>
-          </div>
+          <FriendItemBtns friend={friend!} />
         </div>
       </div>
     </DropdownMenuItem>
