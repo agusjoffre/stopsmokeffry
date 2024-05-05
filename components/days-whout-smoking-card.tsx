@@ -20,7 +20,7 @@ function DaysWithoutSmokingCard({
   startDate,
 }: Props) {
   return (
-    <Card className="h-full flex flex-col justify-center w-full">
+    <Card className="flex flex-2 flex-col justify-center w-full">
       <CardHeader>
         <CardTitle>Días sin fumar</CardTitle>
         <CardDescription>

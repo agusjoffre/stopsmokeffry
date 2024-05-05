@@ -14,6 +14,10 @@ import {
 import StartTheCallengeButton from "@/components/start-the-challenge-button";
 import AddFriendDialog from "@/components/add-friend";
 import { getFriends } from "./_actions/friendActions";
+import {
+  calculateCigarettes,
+  calculateMoneySaved,
+} from "./_actions/calculateStatistics";
 
 async function Home(): Promise<JSX.Element> {
   await initializeUser();
@@ -53,23 +57,46 @@ async function Home(): Promise<JSX.Element> {
 
   const friends = await getFriends();
 
+  const userCigarettes = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    select: {
+      cigarettePrice: true,
+      cigarettesPerDay: true,
+    },
+  });
+
+  const statistics = {
+    moneySaved: calculateMoneySaved(
+      userCigarettes?.cigarettesPerDay!,
+      userCigarettes?.cigarettePrice!,
+      daysWithoutSmoking
+    ),
+    totalCigarettes: calculateCigarettes(
+      userCigarettes?.cigarettesPerDay!,
+      daysWithoutSmoking
+    ),
+    cigarettesPrice: userCigarettes?.cigarettePrice!,
+    cigarettesPerDay: userCigarettes?.cigarettesPerDay!,
+  };
+
   return (
-    <div className="h-full py-20 md:px-80 sm:px-20 flex flex-col md:flex-row items-center md:items-start gap-12 ">
+    <div className="py-20 md:px-80 sm:px-20 flex flex-col md:flex-row items-center md:items-start gap-12 ">
       {isChallenge?.isChallenge ? (
-        <>
-          <div className="flex flex-col gap-12 items-center flex-[2]">
-            <div className="flex items-center gap-6 w-full md:flex-row flex-col">
+        <div className="w-full h-full">
+          <div className="flex flex-col gap-12 items-center flex-[2] h-full">
+            <div className="flex gap-6 md:flex-row flex-col">
               <DaysWithoutSmokingCard
                 startDate={startDate?.startDate!}
                 days={daysWithoutSmoking || 0}
                 hoursPassed={hoursPassed}
               />
-              <StatisticsCard />
-              {/* statistics ? <StatisticsCard statistics={statistics}/> : <StartStatisticsDrawer /> */}
+              {statistics ? <StatisticsCard statistics={statistics} /> : <></>}
             </div>
             <AchievementsCard />
           </div>
-        </>
+        </div>
       ) : (
         <StartTheCallengeButton />
       )}
