@@ -17,6 +17,7 @@ async function Home(): Promise<JSX.Element> {
   await initializeUser();
 
   const user = await currentUser();
+  if (!user) return <div></div>;
 
   /* TODO: get statistics and pass as props */
   const isChallenge = await prisma.user.findUnique({
