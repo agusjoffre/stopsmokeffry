@@ -3,6 +3,7 @@
 import prisma from "@/prisma/prismaClient";
 import { currentUser } from "@clerk/nextjs/server";
 import { User } from "@prisma/client";
+import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -11,9 +12,9 @@ export async function initializeUser() {
 
   if (!clerkUser) redirect("/sign-in");
 
-
   const newUser: User = {
     id: clerkUser.id,
+    code: `${clerkUser.username}-${randomUUID()}`,
     name: clerkUser.username
       ? clerkUser.username
       : (clerkUser.fullName as string),

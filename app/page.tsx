@@ -52,6 +52,7 @@ async function Home(): Promise<JSX.Element> {
           <div className="flex flex-col gap-12 items-center flex-[2]">
             <div className="flex items-center gap-6 w-full md:flex-row flex-col">
               <DaysWithoutSmokingCard
+                startDate={startDate?.startDate!}
                 days={daysWithoutSmoking || 0}
                 hoursPassed={hoursPassed}
               />

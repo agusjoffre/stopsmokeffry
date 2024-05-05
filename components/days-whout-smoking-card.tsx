@@ -11,14 +11,25 @@ import ChallengeLostDialog from "./challenge-lost-dialog";
 type Props = {
   days: number;
   hoursPassed: number;
+  startDate: string;
 };
 
-function DaysWithoutSmokingCard({ days = 0, hoursPassed = 0 }: Props) {
+function DaysWithoutSmokingCard({
+  days = 0,
+  hoursPassed = 0,
+  startDate,
+}: Props) {
   return (
     <Card className="h-full flex flex-col justify-center w-full">
       <CardHeader>
         <CardTitle>Días sin fumar</CardTitle>
-        <CardDescription>Dale que vos podés!</CardDescription>
+        <CardDescription>
+          {!startDate
+            ? "Dale que vos podés!"
+            : `${new Date(startDate).toLocaleDateString()} - ${new Date(
+                startDate
+              ).toTimeString()}`}
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex gap-8">
         <div className="flex gap-5 items-center">

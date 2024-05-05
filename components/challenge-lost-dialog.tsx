@@ -4,11 +4,14 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import { revalidatePath } from "next/cache";
 
 type Props = {};
 
@@ -19,10 +22,7 @@ function ChallengeLostDialog({}: Props) {
 
   return (
     <Dialog>
-      <DialogTrigger
-        onClick={handleClick}
-        className="rounded-xl py-1 text-sm flex items-center justify-center gap-2 w-full bg-destructive text-destructive-foreground hover:bg-destructive-foreground hover:text-destructive hover:duration-300 hover:ease-out"
-      >
+      <DialogTrigger className="rounded-xl py-1 text-sm flex items-center justify-center gap-2 w-full bg-destructive text-destructive-foreground hover:bg-destructive-foreground hover:text-destructive hover:duration-300 hover:ease-out">
         Volví a fumar {"   "}
         <span className="text-2xl">😭</span>
       </DialogTrigger>
@@ -56,6 +56,14 @@ function ChallengeLostDialog({}: Props) {
             . ¡Vos podés lograrlo!
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          <Button
+            onClick={handleClick}
+            className="w-full bg-accent text-accent-foreground hover:text-accent hover:bg-accent-foreground"
+          >
+            Ok. ¡Voy a intentarlo devuelta!
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

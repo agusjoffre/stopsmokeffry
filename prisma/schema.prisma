@@ -13,23 +13,24 @@ model User {
   startDate        String
   cigarettePrice   Int
   cigarettesPerDay Int
+  isChallenge      Boolean      @default(false)
+  code             String       @unique @default(uuid())
   friends          Friendship[] @relation("friends")
   friendsOf        Friendship[] @relation("friendsOf")
-  isChallenge      Boolean      @default(false)
+}
+
+model Friendship {
+  friendId   String
+  friendOfId String
+  state      FriendshipState @default(PENDING)
+  friends    User            @relation("friends", fields: [friendId], references: [id])
+  friendsOf  User            @relation("friendsOf", fields: [friendOfId], references: [id])
+
+  @@id([friendOfId, friendId])
 }
 
 enum FriendshipState {
   ACCEPTED
   PENDING
   REJECTED
-}
-
-model Friendship {
-  friends    User            @relation("friends", fields: [friendId], references: [id])
-  friendId   String
-  friendsOf  User            @relation("friendsOf", fields: [friendOfId], references: [id])
-  friendOfId String
-  state      FriendshipState @default(PENDING)
-
-  @@id([friendOfId, friendId])
 }
