@@ -30,7 +30,7 @@ function FriendsSection({ friends }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {/* {friends.map((friend) => {
+          {friends.map((friend) => {
             const daysPassed = calculateDaysPassed(friend.startDate);
             const hoursPassed = calculateHoursPassed(friend.startDate);
             return (
@@ -57,7 +57,7 @@ function FriendsSection({ friends }: Props) {
                 )}
               </TableRow>
             );
-          })} */}
+          })}
         </TableBody>
       </Table>
     </div>

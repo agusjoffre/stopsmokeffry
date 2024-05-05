@@ -95,4 +95,46 @@ export const friendStateUpdate = async (isAccepted: boolean, friend: User) => {
 export const getFriends = async () => {
   const user = await currentUser();
   if (!user) return;
+
+
+  const friendsAdded = await prisma.user
+    .findUnique({
+      where: { id: user.id },
+    })
+    .friends({
+      where: {
+        state: "ACCEPTED",
+      },
+    });
+  const friendsReceived = await prisma.user
+    .findUnique({
+      where: {
+        id: user.id,
+      },
+    })
+    .friendsOf({
+      where: {
+        state: "ACCEPTED",
+      },
+    });
+
+  const received = friendsReceived ? friendsReceived : [];
+  const added = friendsAdded ? friendsAdded : [];
+
+  const friendsPromise = [...added, ...received].map(async (fr) => {
+    let friendId;
+    if (fr.friendId === user.id) {
+      friendId = fr.friendOfId; // User added this friend
+    } else {
+      friendId = fr.friendId; // User received this friend
+    }
+    const friend = await prisma.user.findUnique({
+      where: { id: friendId },
+    });
+    return friend;
+  });
+
+  const friends = await Promise.all(friendsPromise);
+
+  return friends;
 };

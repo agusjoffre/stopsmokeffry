@@ -7,30 +7,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Friendship {
-  friendId                         String
-  friendOfId                       String
-  state                            FriendshipState @default(PENDING)
-  User_Friendship_friendIdToUser   User            @relation("Friendship_friendIdToUser", fields: [friendId], references: [id])
-  User_Friendship_friendOfIdToUser User            @relation("Friendship_friendOfIdToUser", fields: [friendOfId], references: [id])
-
-  @@id([friendOfId, friendId])
-}
-
 model User {
-  id                                     String       @id @unique
-  name                                   String
-  startDate                              String
-  cigarettePrice                         Int
-  cigarettesPerDay                       Int
-  isChallenge                            Boolean      @default(false)
-  code                                   String       @unique
-  Friendship_Friendship_friendIdToUser   Friendship[] @relation("Friendship_friendIdToUser")
-  Friendship_Friendship_friendOfIdToUser Friendship[] @relation("Friendship_friendOfIdToUser")
+  id               String       @id @unique
+  code             String?      @unique
+  name             String
+  startDate        String
+  cigarettePrice   Int
+  cigarettesPerDay Int
+  friends          Friendship[] @relation("friends")
+  friendsOf        Friendship[] @relation("friendsOf")
+  isChallenge      Boolean      @default(false)
 }
 
 enum FriendshipState {
   ACCEPTED
   PENDING
   REJECTED
+}
+
+model Friendship {
+  friends    User            @relation("friends", fields: [friendId], references: [id])
+  friendId   String
+  friendsOf  User            @relation("friendsOf", fields: [friendOfId], references: [id])
+  friendOfId String
+  state      FriendshipState @default(PENDING)
+
+  @@id([friendOfId, friendId])
 }
