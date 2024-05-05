@@ -16,8 +16,8 @@ type Props = {};
 function StartTheCallengeButton({}: Props) {
   return (
     <Drawer>
-      <DrawerTrigger className="w-full bg-accent text-accent-foreground hover:bg-accent-foreground hover:text-accent py-40 rounded-3xl">
-        Comenzá el desafio!
+      <DrawerTrigger className="w-full text-4xl font-bold bg-accent text-accent-foreground hover:bg-accent-foreground hover:text-accent py-28 rounded-3xl">
+        ¡Comenzá el desafio!
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>

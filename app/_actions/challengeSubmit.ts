@@ -32,5 +32,6 @@ export const challengeSubmit = async (formData: FormData) => {
     data: updatedUser,
   });
 
+
   revalidatePath("/");
 };

@@ -39,7 +39,9 @@ async function Home(): Promise<JSX.Element> {
   });
 
   const daysWithoutSmoking = calculateDaysPassed(startDate?.startDate!);
+
   const hoursPassed = calculateHoursPassed(startDate?.startDate!);
+
 
   /*TODO: get friends */
 

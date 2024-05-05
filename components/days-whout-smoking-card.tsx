@@ -29,7 +29,7 @@ function DaysWithoutSmokingCard({ days = 0, hoursPassed = 0 }: Props) {
         </div>
         <div className="flex gap-2 items-center">
           <h2 className="text-4xl font-extrabold">
-            {hoursPassed >= 0 ? days : 0}
+            {hoursPassed >= 0 ? hoursPassed : 0}
           </h2>
           <span className="text-2xl font-bold">horas.</span>
         </div>
