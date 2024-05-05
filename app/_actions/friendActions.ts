@@ -1,5 +1,4 @@
 "use server";
-import { useToast } from "@/components/ui/use-toast";
 import prisma from "@/prisma/prismaClient";
 import { currentUser } from "@clerk/nextjs/server";
 
@@ -48,4 +47,7 @@ export const addFriend = async (currentState: unknown, formData: FormData) => {
     found: true,
     exists: false,
   };
+};
+export const friendStateUpdate = async (isAccepted: boolean) => {
+  /* si isAccepted true entonces cambiar prisma.friendship.state a ACCEPTED sino cambiar a REJECTED */
 };
