@@ -13,6 +13,7 @@ import {
 } from "./_actions/calculateTime";
 import StartTheCallengeButton from "@/components/start-the-challenge-button";
 import AddFriendDialog from "@/components/add-friend";
+import { getFriends } from "./_actions/friendActions";
 
 async function Home(): Promise<JSX.Element> {
   await initializeUser();
@@ -50,8 +51,7 @@ async function Home(): Promise<JSX.Element> {
     },
   });
 
-  /* TODO: get statistics and pass as props */
-  /*TODO: get friends */
+  const friends = await getFriends();
 
   return (
     <div className="h-full py-20 md:px-80 sm:px-20 flex flex-col md:flex-row items-center md:items-start gap-12 ">
@@ -77,7 +77,7 @@ async function Home(): Promise<JSX.Element> {
       <div className="h-full flex flex-col gap-10 items-center">
         {/* friends ? <FriendsSection friends={friends} /> : <Button>Add a new friend</Button> */}
         <AddFriendDialog userCode={userCode?.code!} />
-        <FriendsSection />
+        <FriendsSection friends={friends} />
       </div>
     </div>
   );

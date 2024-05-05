@@ -31,7 +31,7 @@ async function FriendNotificationItem({ friendship }: Props) {
                 {friend?.name!.slice(0, 2).toLocaleUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <p className="text-sm font-medium">@{friend?.name!}</p>
+            <p className="text-sm font-medium">{friend?.name!}</p>
           </div>
           <FriendItemBtns friend={friend!} />
         </div>

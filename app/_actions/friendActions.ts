@@ -91,3 +91,8 @@ export const friendStateUpdate = async (isAccepted: boolean, friend: User) => {
     );
   }
 };
+
+export const getFriends = async () => {
+  const user = await currentUser();
+  if (!user) return;
+};
