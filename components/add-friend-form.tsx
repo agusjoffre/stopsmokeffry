@@ -34,7 +34,7 @@ function AddFriendForm({}: Props) {
         duration: 1000,
       });
     }
-  }, [state]);
+  }, [state, toast]);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
@@ -45,7 +45,7 @@ function AddFriendForm({}: Props) {
             Puede buscarlo en la opción
           </span>
           <span className="text-xs opacity-80 font-light">
-            'Agregar amigo/a'
+            Agregar amigo/a
           </span>
         </div>
         <Input name="friendCode" required />

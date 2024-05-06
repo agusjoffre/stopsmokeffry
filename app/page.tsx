@@ -84,7 +84,7 @@ async function Home(): Promise<JSX.Element> {
   return (
     <div className="py-20 md:px-80 sm:px-20 flex flex-col md:flex-row items-center md:items-start gap-12 ">
       {isChallenge?.isChallenge ? (
-        <div className="w-full h-full">
+        <div className="w-full ">
           <div className="flex flex-col gap-12 items-center flex-[2] h-full">
             <div className="flex gap-6 md:flex-row flex-col">
               <DaysWithoutSmokingCard
@@ -101,10 +101,9 @@ async function Home(): Promise<JSX.Element> {
         <StartTheCallengeButton />
       )}
 
-      <div className="h-full flex flex-col gap-10 items-center">
-        {/* friends ? <FriendsSection friends={friends} /> : <Button>Add a new friend</Button> */}
+      <div className="h-full flex flex-col gap-10 items-center flex-2">
         <AddFriendDialog userCode={userCode?.code!} />
-        <FriendsSection friends={friends} />
+        <FriendsSection friends={friends!} />
       </div>
     </div>
   );

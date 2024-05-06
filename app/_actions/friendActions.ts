@@ -94,7 +94,7 @@ export const friendStateUpdate = async (isAccepted: boolean, friend: User) => {
 
 export const getFriends = async () => {
   const user = await currentUser();
-  if (!user) return;
+  if (!user) return [];
 
 
   const friendsAdded = await prisma.user
@@ -136,5 +136,5 @@ export const getFriends = async () => {
 
   const friends = await Promise.all(friendsPromise);
 
-  return friends;
+  return friends.filter(friend => friend !== null) as User[];
 };

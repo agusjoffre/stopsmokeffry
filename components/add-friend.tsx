@@ -41,7 +41,10 @@ function AddFriendDialog({ userCode }: Props) {
 
   return (
     <Dialog>
-      <DialogTrigger className="rounded-lg py-3 w-full bg-accent text-accent-foreground flex items-center justify-center gap-2 hover:bg-accent-foreground hover:text-accent">
+      <DialogTrigger
+        className="rounded-lg py-3 w-full bg-accent text-accent-foreground
+       flex items-center justify-center gap-2 hover:bg-accent-foreground hover:text-accent"
+      >
         <PlusCircleIcon />
         Agregar amigo/a
       </DialogTrigger>

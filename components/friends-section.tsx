@@ -15,13 +15,14 @@ import {
 } from "@/app/_actions/calculateTime";
 
 type Props = {
-  friends: User[];
+  friends: User[] | null
+  
 };
 
 function FriendsSection({ friends }: Props) {
   return (
     <div className="flex flex-col gap-5">
-      <Table className="w-full">
+      <Table className="w-full ">
         <TableHeader>
           <TableRow>
             <TableHead className="">Amigo</TableHead>
@@ -30,7 +31,7 @@ function FriendsSection({ friends }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {friends.map((friend) => {
+          {friends?.map((friend) => {
             const daysPassed = calculateDaysPassed(friend.startDate);
             const hoursPassed = calculateHoursPassed(friend.startDate);
             return (

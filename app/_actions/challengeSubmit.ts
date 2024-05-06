@@ -16,7 +16,14 @@ export const challengeSubmit = async (formData: FormData) => {
   if (!cigarettePrice || !cigarettesPerDay) return;
 
   // update the user data
-  const updatedUser: User = {
+  const updatedUser: {
+    id: string;
+    name: string;
+    startDate: string;
+    cigarettePrice: number;
+    cigarettesPerDay: number;
+    isChallenge: boolean;
+  } = {
     id: user.id,
     name: user.username ? user.username : (user.fullName as string),
     isChallenge: true,
