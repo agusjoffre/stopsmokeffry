@@ -71,11 +71,11 @@ async function Home(): Promise<JSX.Element> {
     moneySaved: calculateMoneySaved(
       userCigarettes?.cigarettesPerDay!,
       userCigarettes?.cigarettePrice!,
-      daysWithoutSmoking
+      hoursPassed
     ),
     totalCigarettes: calculateCigarettes(
       userCigarettes?.cigarettesPerDay!,
-      daysWithoutSmoking
+      hoursPassed
     ),
     cigarettesPrice: userCigarettes?.cigarettePrice!,
     cigarettesPerDay: userCigarettes?.cigarettesPerDay!,
@@ -101,7 +101,7 @@ async function Home(): Promise<JSX.Element> {
         <StartTheCallengeButton />
       )}
 
-      <div className="h-full flex flex-col gap-10 items-center flex-2">
+      <div className="h-full flex flex-col gap-10 items-center flex-1">
         <AddFriendDialog userCode={userCode?.code!} />
         <FriendsSection friends={friends!} />
       </div>

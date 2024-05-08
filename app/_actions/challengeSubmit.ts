@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 export const challengeSubmit = async (formData: FormData) => {
   const user = await currentUser();
-  const startDate = new Date(formData.get("startDate") as string).toUTCString();
+  // const startDate = new Date(formData.get("startDate") as string).toUTCString();
   const cigarettePrice = Number(formData.get("cigarettePrice"));
   const cigarettesPerDay = Number(formData.get("cigarettesPerDay"));
 
@@ -29,7 +29,13 @@ export const challengeSubmit = async (formData: FormData) => {
     isChallenge: true,
     cigarettePrice,
     cigarettesPerDay,
-    startDate,
+    startDate: new Date().toLocaleString("en-EN", {
+      hour: "numeric",
+      minute: "numeric",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    }),
   };
 
   const updatedDB = await prisma.user.update({
@@ -38,7 +44,6 @@ export const challengeSubmit = async (formData: FormData) => {
     },
     data: updatedUser,
   });
-
 
   revalidatePath("/");
 };

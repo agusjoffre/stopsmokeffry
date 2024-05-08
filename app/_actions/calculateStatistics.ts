@@ -1,16 +1,20 @@
 export const calculateCigarettes = (
   cigarettesPerDay: number,
-  daysPassed: number
+  hoursPassed: number
 ) => {
-  const total = cigarettesPerDay * daysPassed;
-  return total;
+  const cigarettesPerHour = cigarettesPerDay / 24;
+
+  const total = cigarettesPerHour * hoursPassed;
+  return Number(total.toFixed(0));
 };
 export const calculateMoneySaved = (
   cigarettesPerDay: number,
   cigarettePrice: number,
-  daysPassed: number
+  hoursPassed: number
 ) => {
-  const totalCigarettes = cigarettesPerDay * daysPassed;
+  const cigarettesPerHour = cigarettesPerDay / 24;
+  const totalCigarettes = cigarettesPerHour * hoursPassed;
   const totalSaved = totalCigarettes * cigarettePrice;
-  return totalSaved;
+  return Number(totalSaved.toFixed(0));
 };
+

@@ -30,12 +30,12 @@ function ChallengeForm({}: Props) {
           />
         </div>
       </Label>
-      <Label className="flex flex-col gap-6">
+      {/* <Label className="flex flex-col gap-6">
         <span>¿Cuándo dejaste de fumar?</span>
         <div>
           <Input type="datetime-local" name="startDate" />
         </div>
-      </Label>
+      </Label> */}
 
       <SubmitButton text="Comenzar el desafío" />
     </form>

@@ -24,11 +24,7 @@ function DaysWithoutSmokingCard({
       <CardHeader>
         <CardTitle>Días sin fumar</CardTitle>
         <CardDescription>
-          {!startDate
-            ? "Dale que vos podés!"
-            : `${new Date(startDate).toLocaleDateString()} - ${new Date(
-                startDate
-              ).toTimeString()}`}
+          {!startDate ? "Dale que vos podés!" : `${startDate.toString()}`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex gap-8">
